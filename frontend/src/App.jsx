@@ -5,16 +5,19 @@ import Home from "./pages/Home";
 import Auth from "./pages/Auth";
 import About from "./pages/About";
 import Settings from "./pages/Settings";
+const API = import.meta.env.VITE_API_URL;
 const App = () => {
   const [todos, setTodos] = useState([]);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [editingTodo, setEditingTodo] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
+
 
   const fetchTodos = useCallback(async () => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    const res = await fetch("http://127.0.0.1:5000/todos", {
+    const res = await fetch(`${API}/todos`, {
       headers: { "Authorization": `Bearer ${token}` }
     });
     const data = await res.json();
@@ -24,7 +27,7 @@ const App = () => {
   useEffect(() => { fetchTodos(); }, [fetchTodos]);
 
   const addTodo = async () => {
-    await fetch("http://127.0.0.1:5000/todos", {
+    await fetch(`${API}/todos`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,7 +40,7 @@ const App = () => {
   };
 
   const deltodo = async (id) => {
-    await fetch(`http://127.0.0.1:5000/todos/${id}`, {
+    await fetch(`${API}/todos/${id}`, {
       method: "DELETE",
       headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
     });
@@ -45,7 +48,7 @@ const App = () => {
   };
 
   const saveUpdate = async (id, updatedData) => {
-    await fetch(`http://127.0.0.1:5000/todos/${id}`, {
+    await fetch(`${API}/todos/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

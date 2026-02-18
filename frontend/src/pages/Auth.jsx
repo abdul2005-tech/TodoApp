@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+const API = import.meta.env.VITE_API_URL;
 const Auth = ({ fetchTodos }) => {
   const [mode, setMode] = useState("login"); // "login", "register", or "forgot"
   const [username, setUsername] = useState("");
@@ -9,7 +9,7 @@ const Auth = ({ fetchTodos }) => {
     e.preventDefault();
     let endpoint = mode === "login" ? "login" : mode === "register" ? "register" : "reset-password";
     
-    const res = await fetch(`http://127.0.0.1:5000/${endpoint}`, {
+    const res = await fetch(`${API}/${endpoint}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password: password, new_password: password })
