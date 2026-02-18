@@ -13,22 +13,20 @@ body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   background: #050505;
   color: white;
-  overflow-x: hidden;
-  /* Animated Mesh Background */
+  min-height: 100vh;
   background-image: 
     radial-gradient(at 0% 0%, rgba(0, 245, 255, 0.15) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(112, 0, 255, 0.15) 0px, transparent 50%),
-    radial-gradient(at 50% 100%, rgba(255, 0, 193, 0.1) 0px, transparent 50%);
+    radial-gradient(at 100% 0%, rgba(112, 0, 255, 0.15) 0px, transparent 50%);
   background-attachment: fixed;
 }
 
-/* --- Navigation --- */
+/* --- Navbar --- */
 .navbar {
   position: fixed;
-  top: 0; width: 100%; height: 85px;
+  top: 0; width: 100%; height: 80px;
   display: flex; justify-content: space-between; align-items: center;
-  padding: 0 8%; backdrop-filter: blur(20px);
-  background: rgba(0, 0, 0, 0.6);
+  padding: 0 5%; backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.7);
   border-bottom: 1px solid var(--border);
   z-index: 1000;
   box-sizing: border-box;
@@ -36,109 +34,184 @@ body {
 
 .logo {
   font-family: 'Syncopate', sans-serif;
-  font-size: 24px;
+  font-size: 20px;
   background: linear-gradient(to right, var(--primary), var(--secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: 2px;
 }
 
-.nav-links {
-  display: flex; gap: 40px; list-style: none;
+.nav-links { display: flex; gap: 30px; list-style: none; align-items: center; }
+.nav-links a { text-decoration: none; color: #fff; font-size: 13px; font-weight: 600; text-transform: uppercase; }
+.nav-links button { 
+    background: transparent; border: 1px solid var(--accent); color: var(--accent); 
+    padding: 8px 15px; border-radius: 5px; cursor: pointer; 
 }
 
-.nav-links a {
-  text-decoration: none; color: #fff;
-  font-weight: 600; font-size: 14px;
-  text-transform: uppercase; letter-spacing: 1px;
-  transition: 0.3s;
+/* --- Layout --- */
+.app-wrapper, .auth-page, .about-page {
+  padding-top: 120px;
+  display: flex; justify-content: center;
+  min-height: calc(100vh - 120px);
 }
 
-.nav-links a:hover { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
-
-/* --- The Card Experience --- */
-.app-wrapper {
-  display: flex; justify-content: center; align-items: center;
-  min-height: 100vh; padding: 120px 20px 50px;
-}
-
-.card {
-  width: 100%; max-width: 600px;
-  padding: 50px; border-radius: 40px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
-  backdrop-filter: blur(40px);
+.card, .auth-card, .about-card {
+  width: 90%; max-width: 550px;
+  padding: 40px; border-radius: 30px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(30px);
   border: 1px solid var(--border);
-  box-shadow: 0 40px 100px rgba(0,0,0,0.8);
-  position: relative;
-  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
 
-/* Subtle glow effect behind card */
-.card::before {
-  content: ''; position: absolute; top: -50%; left: -50%;
-  width: 200%; height: 200%;
-  background: radial-gradient(circle, rgba(0,245,255,0.05) 0%, transparent 70%);
-  z-index: -1;
+/* --- Form Elements --- */
+input {
+  width: 100%; padding: 15px; margin-bottom: 15px;
+  background: rgba(0,0,0,0.3); border: 1px solid var(--border);
+  border-radius: 12px; color: #fff; box-sizing: border-box;
 }
+input:focus { outline: none; border-color: var(--primary); }
 
-h1 {
-  font-family: 'Syncopate', sans-serif;
-  font-size: 28px; text-align: center; margin-bottom: 40px;
-}
-
-/* --- High-End Inputs --- */
-.input-group input {
-  width: 100%; padding: 18px; margin-bottom: 15px;
-  background: rgba(0,0,0,0.4); border: 1px solid var(--border);
-  border-radius: 15px; color: #fff; font-size: 16px;
-  transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-sizing: border-box;
-}
-
-.input-group input:focus {
-  outline: none; border-color: var(--primary);
-  box-shadow: 0 0 20px rgba(0,245,255,0.2);
-  transform: translateY(-2px);
-}
-
-.input-group button {
-  width: 100%; padding: 18px; border-radius: 15px;
-  border: none; font-weight: 800; font-size: 16px;
+.input-group button, .auth-card button {
+  width: 100%; padding: 15px; border-radius: 12px; border: none;
   background: linear-gradient(45deg, var(--primary), var(--secondary));
-  cursor: pointer; transition: 0.4s; color: #000;
-  text-transform: uppercase; margin-bottom: 30px;
-}
-
-.input-group button:hover {
-  transform: scale(1.02);
-  box-shadow: 0 10px 30px rgba(0, 245, 255, 0.4);
+  color: #000; font-weight: 800; cursor: pointer;
 }
 
 /* --- Todo Items --- */
 .todo-item {
-  background: rgba(255,255,255,0.03);
-  padding: 25px; border-radius: 20px;
-  margin-top: 20px; border-left: 4px solid var(--primary);
+  background: rgba(255,255,255,0.03); padding: 20px; border-radius: 15px;
+  margin-top: 15px; border-left: 4px solid var(--primary);
   display: flex; justify-content: space-between; align-items: center;
-  transition: 0.4s;
 }
+.todo-text h3 { margin: 0; color: var(--primary); }
+.todo-text p { margin: 5px 0 0; opacity: 0.6; font-size: 14px; }
 
-.todo-item:hover {
-  background: rgba(255,255,255,0.08);
-  transform: translateX(10px);
-}
-
-.todo-text h3 { margin: 0; font-size: 20px; color: var(--primary); }
-.todo-text p { margin: 8px 0 0; opacity: 0.6; font-size: 14px; }
-
-/* --- Interactive Buttons --- */
 .update-btn, .delete-btn {
-  padding: 10px 15px; border-radius: 10px; border: none;
-  font-weight: 600; cursor: pointer; transition: 0.3s;
+  padding: 8px 12px; border-radius: 8px; border: none; cursor: pointer; font-size: 12px;
+}
+.update-btn { background: rgba(112, 0, 255, 0.2); color: #b784ff; margin-right: 5px; }
+.delete-btn { background: rgba(255, 0, 193, 0.1); color: #ff00c1; }
+/* Ensure the button doesn't shrink or squish */
+.main-action-btn {
+  width: 100%;
+  padding: 18px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  color: #000;
+  font-weight: 800;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  transition: 0.3s;
 }
 
-.update-btn { background: rgba(112, 0, 255, 0.2); color: #b784ff; border: 1px solid var(--secondary); }
-.update-btn:hover { background: var(--secondary); color: white; }
+.main-action-btn:hover {
+  filter: brightness(1.2);
+  transform: translateY(-2px);
+}
 
-.delete-btn { background: rgba(255, 0, 193, 0.1); color: #ff00c1; border: 1px solid var(--accent); margin-left: 10px; }
-.delete-btn:hover { background: var(--accent); color: white; }
+/* Fix the overlapping Edit/Dismiss buttons */
+.btn-group {
+  display: flex;
+  flex-direction: column; /* Stacked layout looks better for long text */
+  gap: 8px;
+  min-width: 90px; /* Ensures buttons don't disappear */
+}
+
+.update-btn, .delete-btn {
+  width: 100%; /* Take full width of the side group */
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  border: 1px solid transparent;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Align text to top */
+  gap: 15px;
+}
+
+.todo-text {
+  flex: 1; /* Take up all available space */
+}
+@import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap');
+
+:root {
+  --primary: #00f5ff;
+  --secondary: #7000ff;
+  --accent: #ff00c1;
+  --border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  margin: 0; font-family: 'Plus Jakarta Sans', sans-serif;
+  background: #050505; color: white;
+  background-image: radial-gradient(at 0% 0%, rgba(0, 245, 255, 0.1) 0px, transparent 50%);
+}
+
+.navbar {
+  position: fixed; top: 0; width: 100%; height: 80px;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 5%; backdrop-filter: blur(20px); background: rgba(0, 0, 0, 0.7);
+  border-bottom: 1px solid var(--border); z-index: 1000; box-sizing: border-box;
+}
+
+.logo { font-family: 'Syncopate', sans-serif; background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.nav-links { display: flex; gap: 20px; list-style: none; }
+.nav-links a { color: white; text-decoration: none; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+
+.app-wrapper, .auth-page { padding-top: 120px; display: flex; justify-content: center; min-height: 100vh; }
+.card, .auth-card { width: 95%; max-width: 600px; padding: 40px; border-radius: 30px; background: rgba(255,255,255,0.03); backdrop-filter: blur(30px); border: 1px solid var(--border); }
+
+input, .custom-textarea {
+  width: 100%; padding: 15px; margin-bottom: 15px;
+  background: rgba(0,0,0,0.4); border: 1px solid var(--border);
+  border-radius: 12px; color: white; font-family: inherit; box-sizing: border-box;
+}
+
+.main-action-btn {
+  width: 100%; padding: 18px; border-radius: 12px; border: none;
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  color: black; font-weight: 800; cursor: pointer; text-transform: uppercase;
+}
+
+/* Modal Styling */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.9); display: flex; justify-content: center; align-items: center; z-index: 2000;
+}
+
+.modal-content {
+  background: #0a0a0a; padding: 40px; border-radius: 25px;
+  border: 1px solid var(--primary); width: 90%; max-width: 500px;
+}
+
+.todo-item {
+  background: rgba(255,255,255,0.03); padding: 20px; border-radius: 15px; margin-top: 15px;
+  display: flex; justify-content: space-between; gap: 15px; border-left: 4px solid var(--primary);
+}
+
+.todo-text { flex: 1; white-space: pre-wrap; } /* preserve line breaks */
+.todo-text h3 { margin: 0; color: var(--primary); font-size: 18px; }
+.todo-text p { margin-top: 8px; opacity: 0.7; font-size: 14px; }
+
+.btn-group { display: flex; flex-direction: column; gap: 8px; min-width: 90px; }
+.update-btn { background: rgba(112, 0, 255, 0.2); color: #b784ff; border: none; padding: 8px; border-radius: 5px; cursor: pointer; }
+.delete-btn { background: rgba(255, 0, 193, 0.1); color: #ff00c1; border: none; padding: 8px; border-radius: 5px; cursor: pointer; }
+.link-text {
+  cursor: pointer;
+  transition: 0.3s;
+  color: white;
+}
+.link-text:hover {
+  color: var(--primary);
+  text-shadow: 0 0 8px var(--primary);
+}
