@@ -215,3 +215,57 @@ input, .custom-textarea {
   color: var(--primary);
   text-shadow: 0 0 8px var(--primary);
 }
+/* --- Mobile Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 5%;
+    height: 70px;
+  }
+
+  .logo {
+    font-size: 18px; /* Slightly smaller logo */
+  }
+
+  .nav-links {
+    gap: 15px; /* Tighten nav spacing */
+  }
+
+  .nav-links a {
+    font-size: 11px;
+  }
+
+  .app-wrapper, .auth-page {
+    padding-top: 100px; /* Less top padding */
+    padding-inline: 15px; /* Prevent card from touching screen edges */
+  }
+
+  .card, .auth-card {
+    padding: 25px; /* Reduce internal padding for more screen real estate */
+    border-radius: 20px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  /* Make buttons easier to tap with thumbs */
+  .main-action-btn {
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  .todo-item {
+    flex-direction: column; /* Stack buttons under text on very small screens */
+    align-items: flex-start;
+  }
+
+  .btn-group {
+    flex-direction: row; /* Horizontal buttons on mobile */
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .update-btn, .delete-btn {
+    flex: 1; /* Equal width buttons */
+  }
+}
