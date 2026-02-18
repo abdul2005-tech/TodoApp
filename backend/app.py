@@ -124,5 +124,8 @@ def reset_password():
     db.session.commit()
     return jsonify({"message": "Password reset successful"})
 
+@app.route("/")
+def home():
+    return "Server is running", 200
 if __name__ == "__main__":
     app.run(debug=True)
