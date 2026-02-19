@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+import os
 from flask_jwt_extended import (
     JWTManager,
     create_access_token,
@@ -11,8 +12,12 @@ import bcrypt
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
+database_url = os.environ.get("DATABASE_URL")
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
+if database_url and database_url.startswith("postgres://"):
+    database_url = database_url.replace("postgres://", "postgresql://", 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = database_url        
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["JWT_SECRET_KEY"] = "super-secret-key"
 
@@ -124,5 +129,8 @@ def reset_password():
     db.session.commit()
     return jsonify({"message": "Password reset successful"})
 
+@app.route("/")
+def home():
+    return "Server is running", 200
 if __name__ == "__main__":
     app.run(debug=True)
